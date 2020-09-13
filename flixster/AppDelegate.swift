@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  flixster
 //
-//  Created by Abhay Naik on 8/30/20.
-//  Copyright © 2020 Abhay Naik (CodePath). All rights reserved.
+//  Created by Maaz Adil on 8/30/20.
+//  Copyright © 2020 Maaz Adil (CodePath). All rights reserved.
 //
 
 import UIKit

@@ -2,8 +2,8 @@
 //  MovieGridCell.swift
 //  flixster
 //
-//  Created by Abhay Naik on 9/9/20.
-//  Copyright © 2020 Abhay Naik (CodePath). All rights reserved.
+//  Created by Maaz Adl on 9/9/20.
+//  Copyright © 2020 Maaz Adil (CodePath). All rights reserved.
 //
 
 import UIKit

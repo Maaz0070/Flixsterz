@@ -2,8 +2,8 @@
 //  MovieGridViewController.swift
 //  flixster
 //
-//  Created by Abhay Naik on 9/9/20.
-//  Copyright © 2020 Abhay Naik (CodePath). All rights reserved.
+//  Created by Maaz Adil on 9/9/20.
+//  Copyright © 2020 Maaz Adil (CodePath). All rights reserved.
 //
 
 import UIKit
@@ -19,6 +19,8 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
     super.viewDidLoad()
     collectionView.delegate = self
     collectionView.dataSource = self
+        
+        
     let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
     layout.minimumLineSpacing = 4
     layout.minimumInteritemSpacing = 4
@@ -35,9 +37,18 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
                      print(error.localizedDescription)
                   } else if let data = data {
                      let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                   self.movies = dataDictionary["results"] as! [[String:Any]]
+                    
+                    
+                   self.movies = dataDictionary["results"] as! [[String:Any]] //gets movies array as results that are of type Strings and format is Any
                     self.collectionView.reloadData()
+                    //after getting data from internet hey collection view reload your data because the movie count has been updated
                     print(self.movies)
+                    
+                    // print(dataDictionary) //prints the title of movies
+                    // TODO: Get the array of movies
+                      // TODO: Store the movies in a property to use elsewhere
+                      // TODO: Reload your table view data
+
                     
                     
                   }
@@ -54,14 +65,13 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridCell", for: indexPath) as! MovieGridCell
         
-        let movie = movies[indexPath.item]
+        let movie = movies[indexPath.item] //Gets the movies, collectionViews have items
         
-        let baseUrl = "https://image.tmdb.org/t/p/w185"
-                   let posterPath = movie["poster_path"] as! String
+                   let baseUrl = "https://image.tmdb.org/t/p/w185" //gets image size from imdb
+                   let posterPath = movie["poster_path"] as! String //posterPath from movie list as string
                    let posterUrl = URL(string: baseUrl + posterPath)
                    
-                   cell.posterView.af_setImage(withURL: posterUrl!)
-        
+                   cell.posterView.af_setImage(withURL: posterUrl!) //gets url and downlloads and sets the image of movie
         return cell
     }
     

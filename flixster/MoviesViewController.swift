@@ -2,8 +2,8 @@
 //  MoviesViewController.swift
 //  flixster
 //
-//  Created by Abhay Naik on 8/30/20.
-//  Copyright © 2020 Abhay Naik (CodePath). All rights reserved.
+//  Created by Maaz Adil on 8/30/20.
+//  Copyright © 2020 Maaz Adil (CodePath). All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var tableView: UITableView!
     
-    var movies = [[String:Any]]()
+    var movies = [[String:Any]]() //declare array and dictionary
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.delegate = self
 
         // Do any additional setup after loading the view.
-        print("Hello")
+        //print("Hello")
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -34,9 +34,11 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
               print(error.localizedDescription)
            } else if let data = data {
               let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-            self.movies = dataDictionary["results"] as! [[String:Any]]
+            
+            
+            self.movies = dataDictionary["results"] as! [[String:Any]] //gets movies array as results that are of type Strings and format is Any
 
-            self.tableView.reloadData()
+            self.tableView.reloadData() //reload the API dictionary after startup
                 print(dataDictionary)
 
               // TODO: Get the array of movies
@@ -50,24 +52,26 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return movies.count
+            return movies.count  // returns number of rows by counting elements in movies array
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieCell  //Use next cell when screen is filled
             
-            let movie = movies[indexPath.row]
-            let title = movie["title"] as! String
-            let synopsis = movie["overview"] as! String
+            let movie = movies[indexPath.row] //gets movie from array of movies at row index
+            let title = movie["title"] as! String //title is taken from movie dictionary format of string
+            let synopsis = movie["overview"] as! String //synopsis is taken from movie dictionary in format of string
             
             cell.titleLabel.text = title
             cell.synopsisLabel.text = synopsis
             
             let baseUrl = "https://image.tmdb.org/t/p/w185"
+            //gets image size from imdb
             let posterPath = movie["poster_path"] as! String
+            //posterPath from movie list as string
             let posterUrl = URL(string: baseUrl + posterPath)
             
-            cell.posterView.af_setImage(withURL: posterUrl!)
+            cell.posterView.af_setImage(withURL: posterUrl!) //gets url and downlloads and sets the image of movie
             
             return cell
         }

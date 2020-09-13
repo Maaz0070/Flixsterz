@@ -2,8 +2,8 @@
 //  MovieDetailsViewController.swift
 //  flixster
 //
-//  Created by Abhay Naik on 9/9/20.
-//  Copyright © 2020 Abhay Naik (CodePath). All rights reserved.
+//  Created by Maaz Adil on 9/9/20.
+//  Copyright © 2020 Maaz Adil (CodePath). All rights reserved.
 //
 
 import UIKit
@@ -27,15 +27,17 @@ class MovieDetailsViewController: UIViewController {
         synopsisLabel.sizeToFit()
         
         let baseUrl = "https://image.tmdb.org/t/p/w185"
+        //gets image size from imdb
         let posterPath = movie["poster_path"] as! String
+        //posterPath from movie list as string
         let posterUrl = URL(string: baseUrl + posterPath)
         
-        posterView.af_setImage(withURL: posterUrl!)
-        
+        posterView.af_setImage(withURL: posterUrl!) //gets url and downlloads and sets the image of movie
         let backdropPath = movie["backdrop_path"] as! String
+        //backdropPath from movie list as string
         let backdropUrl = URL(string: "https://image.tmdb.org/t/p/w780" + backdropPath)
         
-        backdropView.af_setImage(withURL: backdropUrl!)
+        backdropView.af_setImage(withURL: backdropUrl!) //gets url and downlloads and sets the image of backdrop
         
     }
     
